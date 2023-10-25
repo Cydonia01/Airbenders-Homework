@@ -42,15 +42,14 @@ int secondGreatest(Array<T> &arr) {
 	int second = minNum;
 	
 	for (int i = 0; i < arr.size(); i++) {
-		if (arr[i] > best)
+		if (arr[i] > best){
+			second = best;
 			best = arr[i];
-	}
-	
-	for (int i = 0; i < arr.size(); i++) {
-		if (arr[i] < best && arr[i] > second)
+		}
+		else if (arr[i] > second && arr[i] != best)
 			second = arr[i];
 	}
-	return (second == minNum) ? 1:second; 
+	return (second == minNum) ? 1:second;
 }
 
 int main() {
@@ -67,5 +66,7 @@ int main() {
 		std::cin>>myArr[i];
 	}
 	
-	std::cout<<"The second greatest element is: "<<secondGreatest(myArr);
+	int result = secondGreatest(myArr);
+	std::cout<<"Second greatest element is: "<<result;
 }
+

@@ -11,24 +11,22 @@
 #include<iostream>
 #include<cctype>
 #include<string>
+#include<limits>
 
 bool isPalindrome(std::string line) {
 	int l = 0;
 	int r = line.length() - 1;
 	
-	while (l <= r) {
+	while (l < r) {
 		if (!isalnum(line[l])) {
 			l++;
-			continue;
 		}
-		if (!isalnum(line[r])) {
+		else if (!isalnum(line[r])) {
 			r--;
-			continue;
 		}
-		if (tolower(line[l]) == tolower(line[r])) {
+		else if (tolower(line[l]) == tolower(line[r])) {
 			l++;
 			r--;
-			continue;
 		}
 		else {
 			return false;
@@ -42,7 +40,7 @@ int main() {
 	char check = 'y';
 	std::string palCheck;
 	
-	while (check == 'y' || check == 'Y') {
+	while (check == 'y') {
 		std::cout<<"Enter a line: ";
 		std::getline(std::cin, line);
 		
@@ -50,8 +48,13 @@ int main() {
 		std::cout<<palCheck<<std::endl;
 		
 		std::cout<<"Do you want to check another string? (y/n)"<<std::endl;
-		std::cin>>check;
-		std::cin.ignore(INT_MAX, '\n');
+		
+		while (!(std::cin>>check) || check != 'y' && check != 'n') {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout<<"Please enter a valid input!"<<std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	
 	return 0;

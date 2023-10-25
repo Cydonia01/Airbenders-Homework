@@ -12,33 +12,33 @@
 #include<vector>
 #include<cmath>
 
-bool coprimeCheck(int p, int n) {
-	for (int i = 2; i <= n/2; i++) {
-		if (p % i == 0 && n % i == 0)
+bool coprimeCheck(int primeNum, int div) {
+	for (int i = 2; i <= div/2; i++) {
+		if (primeNum % i == 0 && div % i == 0)
 			return false;
 	}
 	return true;
 }
 
 int main() {
-	int p;
-	std::vector<int> list;
-	std::cin>>p;
-	for (int i = 2; i < p; i++) {
-		if (coprimeCheck(p, i)) {
+	int primeNum;
+	std::vector<int> orderList;
+	std::cin>>primeNum;
+	for (int i = 2; i < primeNum; i++) {
+		if (coprimeCheck(primeNum, i)) {
 			int count = 1;
 			bool found = false;
 			while (!found) {
-				if ((int)pow(i, count) % p == 1) {
+				if (static_cast<int>(pow(i, count)) % primeNum == 1) {
 					found = true;
-					list.push_back(count);
+					orderList.push_back(count);
 				}
 				count++;
 			}
 		}
 	}
-	for (int i = 0; i < list.size(); i++) {
-		std::cout<<list[i]<<" ";
+	for (int i = 0; i < orderList.size(); i++) {
+		std::cout<<orderList[i]<<" ";
 	}
 	return 0;
 }

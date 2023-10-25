@@ -11,7 +11,7 @@
 #include <vector>
 #include <limits>
 
-void display(std::vector<std::vector<int>> matrix) {
+void display(std::vector<std::vector<int>> &matrix) {
 	for (int i = 0; i < matrix.size(); i++) {
 		for (int j = 0; j < matrix[i].size(); j++) {
 			std::cout<<matrix[i][j]<<" ";
@@ -24,12 +24,18 @@ void fill(std::vector<std::vector<int>> &matrix) {
 	for (int i = 0; i < matrix.size(); i++) {
 		for (int j = 0; j < matrix[0].size(); j++) {
 			std::cout<<"Enter value for ("<<i + 1<<", "<<j + 1<<"): ";
-			std::cin>>matrix[i][j];
+			int value;
+			while (!(std::cin>>value)) {
+		        std::cin.clear();
+		        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		        std::cout << "Invalid input. Please enter a integer: ";
+		    }
+		    matrix[i][j] = value;
 		}
 	}
 }
 
-std::vector<std::vector<int>> addMatrix(std::vector<std::vector<int>> first, std::vector<std::vector<int>> second) {
+std::vector<std::vector<int>> addMatrix(std::vector<std::vector<int>> &first, std::vector<std::vector<int>> &second) {
 	std::vector<std::vector<int>> result(first.size(), std::vector<int>(first[0].size(), 0));
 	
 	for (int i = 0; i < first.size(); i++) {
@@ -40,7 +46,7 @@ std::vector<std::vector<int>> addMatrix(std::vector<std::vector<int>> first, std
 	return result;
 }
 
-std::vector<std::vector<int>> subtractMatrix(std::vector<std::vector<int>> first, std::vector<std::vector<int>> second) {
+std::vector<std::vector<int>> subtractMatrix(std::vector<std::vector<int>> &first, std::vector<std::vector<int>> &second) {
 	std::vector<std::vector<int>> result(first.size(), std::vector<int>(first[0].size(), 0));
 	
 	for (int i = 0; i < first.size(); i++) {
@@ -57,7 +63,7 @@ int main() {
 	
 	std::cout<<"Enter row and column of matrices: ";
 	
-	while (!(std::cin >> row >> col) || row <= 0 || col <= 0) {
+	while (!(std::cin >> row >> col) || row <= 0 && col <= 0) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Invalid input. Please enter positive integers for row and column: ";
