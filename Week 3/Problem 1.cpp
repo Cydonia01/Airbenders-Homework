@@ -52,7 +52,7 @@ int secondGreatest(Array<T> &arr) {
 	return (second == minNum) ? 1:second;
 }
 
-int main() {
+int main(int argc, char **argv) {
 	int size;
 	
 	std::cout<<"Enter the size of the array: ";
